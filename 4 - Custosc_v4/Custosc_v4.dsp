@@ -42,23 +42,23 @@ gain4 = hslider("[%0]gain 4[style:knob]",0.1,0,1,0.01);
 
 // Waveforms Algorythm
 _waveform = nentry("Waveform[style:menu{'Sine':0;'Sawtooth':1;'Square':2;'Triangle':3}]",
-    0,1,2,3);
-harmonics(osc, f, hr) = par(i,4,os.osc(f*(i+1)+(i*f*hr*1))) :> _;
+    0,0,3,1);
+harmonics(osc, f, hr) = par(i,4,osc(f*(i+1)+(i*f*hr*1))) :> _;
 wave(wf, f, hr) = harmonics(os.oscsin, f, hr),
-                  harmonics(os.oscsin, f, hr),
-                  harmonics(os.oscsin, f, hr),
-                  harmonics(os.oscsin, f, hr) : ba.selectn(4,wf);
+                  harmonics(os.sawtooth, f, hr),
+                  harmonics(os.square, f, hr),
+                  harmonics(os.triangle, f, hr) : ba.selectn(4,wf) : /(4);
 
-wave_1 = wave(_waveform, freq1, harm_ratio1);
-wave_2 = wave(_waveform, freq2, harm_ratio2);
-wave_3 = wave(_waveform, freq3, harm_ratio3);
-wave_4 = wave(_waveform, freq4, harm_ratio4);
+wave_1 = wave(_waveform, freq1, harm_ratio1)*gain1;
+wave_2 = wave(_waveform, freq2, harm_ratio2)*gain2;
+wave_3 = wave(_waveform, freq3, harm_ratio3)*gain3;
+wave_4 = wave(_waveform, freq4, harm_ratio4)*gain4;
 
 
 // Grouping
 grouping = vgroup("s1",
 hgroup("1",wave_1),
-hgroup("2", wave_2),
+hgroup("2",wave_2),
 hgroup("3",wave_3),
 hgroup("4",wave_4)
 );
