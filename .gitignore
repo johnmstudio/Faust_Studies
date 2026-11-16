@@ -1,0 +1,16 @@
+
+# Compiled binaries
+*.so
+*.a
+*.o
+
+# Build directories
+Builds/
+
+# Faust compiled outputs
+*.dsp.cpp
+*.dsp.h
+
+# IDE files
+.idea/
+.vscode/
