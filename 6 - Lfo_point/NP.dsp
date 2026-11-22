@@ -29,7 +29,7 @@ step = 1 + (osc_freq / 16000) * 99;
 osc1 = os.osc(floor(osc_freq / step) * step);
 
 gain1 = hslider("[%0]gain[style:knob]",0.5,0,1,0.1) : si.smoo;
-lfo1 = os.lf_triangle(lfo_freq) : si.smoo;
+// lfo1 = os.lf_triangle(lfo_freq) : si.smoo;
 
 lfo_amp = wave;
 
